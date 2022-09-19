@@ -13,6 +13,7 @@
 #include <rte_mempool.h>
 
 #include "port.h"
+#include "process.h"
 
 void main_loop()
 {
@@ -20,7 +21,7 @@ void main_loop()
         uint16_t port_id;
         RTE_ETH_FOREACH_DEV(port_id)
         {
-            // TODO
+            collect_stats(port_id);
         }
     }
 }
