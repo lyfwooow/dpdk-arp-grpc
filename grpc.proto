@@ -10,11 +10,12 @@ message grpc_dpdk_arp_req{
 }
 
 message grpc_dpdk_arp_res{
-    required sgw_common_res res = 1;
-    message table_arp_pkts {
+    required arg_common_res res = 1;
+    message table_pkts {
         required string scrip = 1;
-        required uint32 arp_request_pkts = 2;
+        required uint32 request_pkts_amount = 2;
         required uint32 rate = 3;
     }
-    repeated table_arp_pkts pkts = 2; 
+    repeated table_pkts arp_pkts = 2; 
+    repeated table_pkts multicast_pkts = 3;
 }
