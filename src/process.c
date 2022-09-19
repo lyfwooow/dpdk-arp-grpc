@@ -12,7 +12,7 @@
 
 #define NB_PKTS 4
 
-void collect_stats_arp(struct rte_arp_hdr *arp_hdr)
+static void collect_stats_arp(struct rte_arp_hdr *arp_hdr)
 {
     /* 只考虑 ARP 请求 */
     if (arp_hdr->arp_opcode != RTE_ARP_OP_REQUEST)
@@ -34,7 +34,7 @@ void collect_stats(uint16_t port_id)
         switch (ether_type) {
         case RTE_ETHER_TYPE_ARP:
             struct rte_arp_hdr *arp_hdr =
-                rte_pktmbuf_mtod_offset(pkts[i], struct ret_arp_hdr *, sizeof(struct rte_ether_hdr));
+                rte_pktmbuf_mtod_offset(pkts[i], struct rte_arp_hdr *, sizeof(struct rte_ether_hdr));
             collect_stats_arp(arp_hdr);
             break;
         case RTE_ETHER_TYPE_IPV4:
