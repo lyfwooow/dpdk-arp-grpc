@@ -6,7 +6,7 @@ message arp_common_res {
 }
 
 message grpc_dpdk_arp_req{
-
+    required arg_common_res res = 1;
 }
 
 message grpc_dpdk_arp_res{
