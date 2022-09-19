@@ -37,7 +37,7 @@ void port_init(uint16_t port_id, struct rte_mempool *mbuf_pool)
         rte_exit(1, "rte_eth_dev_socket_id: err=%d, port=%" PRIu16 "\n", ret, port_id);
     }
 
-    /* 配置接受队列 */
+    /* 配置接收队列 */
     ret = rte_eth_rx_queue_setup(port_id, 0, nb_rx_desc, socket_id, NULL, mbuf_pool);
     if (ret < 0) {
         rte_exit(1, "rte_eth_rx_queue_setup: err=%d, port=%" PRIu16 "\n", ret, port_id);
@@ -49,11 +49,13 @@ void port_init(uint16_t port_id, struct rte_mempool *mbuf_pool)
         rte_exit(1, "rte_eth_tx_queue_setup: err=%d, port=%" PRIu16 "\n", ret, port_id);
     }
 
+    /* 启动设备 */
     ret = rte_eth_dev_start(port_id);
     if (ret < 0) {
         rte_exit(1, "rte_eth_dev_start: err=%d, port=%" PRIu16 "\n", ret, port_id);
     }
 
+    /* 启用混杂模式 */
     ret = rte_eth_promiscuous_enable(port_id);
     if (ret < 0) {
         rte_exit(1, "rte_eth_promiscuous_enable: err=%d, port=%" PRIu16 "\n", ret, port_id);
