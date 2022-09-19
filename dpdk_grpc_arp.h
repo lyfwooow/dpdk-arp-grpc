@@ -3,9 +3,9 @@
 #define ARP_INFO_MAX_TBL_NUM 100 //这里不确定max size
 
 typedef struct arp_info_tbl_s{
-	const char *name;
-	uint32_t max_size;
-	uint32_t cur_entry_num;
+	const char *srcip;
+	uint32_t arp_request_pkts;
+	uint32_t rate;
 }arp_info_tbl_t;
 
 typedef struct arp_pkts_tbl_s{

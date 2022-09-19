@@ -1,9 +1,8 @@
 syntax="proto2";
 
 
-message sgw_common_res {
+message arp_common_res {
     required int32 ret_state = 1;
-    optional string err_msg = 2;
 }
 
 message grpc_dpdk_arp_req{
