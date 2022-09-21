@@ -49,5 +49,7 @@ void collect_stats(uint16_t port_id)
 
         if (rte_is_multicast_ether_addr(&ether_hdr->dst_addr)) {
         }
+
+        rte_pktmbuf_free(pkts[i]);
     }
 }
