@@ -9,7 +9,6 @@ class NetStats
 public:
     NetStats() : num_arp(0), num_ipv4(0), num_ipv6(0), num_multicast(0) {}
 
-private:
     uint32_t num_arp;
     uint32_t num_ipv4;
     uint32_t num_ipv6;

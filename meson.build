@@ -8,6 +8,7 @@ project(
 dpdk = dependency('libdpdk')
 
 sources = files(
+    'src/data.cpp',
     'src/main.cpp',
     'src/port.c',
     'src/process.cpp',
