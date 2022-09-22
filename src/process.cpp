@@ -21,7 +21,7 @@ static inline void collect_stats_arp(struct rte_arp_hdr *arp_hdr, NetStats &st)
 
     uint32_t src_ip = rte_be_to_cpu_32(arp_hdr->arp_data.arp_sip);
     st.arp_stats[src_ip]++;
-    printf("Detect ARP requested by " IPV4_PRT_FMT "\n", IPV4_BYTES(src_ip));
+    //printf("Detect ARP requested by " IPV4_PRT_FMT "\n", IPV4_BYTES(src_ip));
 }
 
 void collect_stats(uint16_t port_id, NetStats &st)
@@ -33,7 +33,7 @@ void collect_stats(uint16_t port_id, NetStats &st)
         struct rte_ether_hdr *ether_hdr = rte_pktmbuf_mtod(pkts[i], struct rte_ether_hdr *);
         uint16_t ether_type = rte_be_to_cpu_16(ether_hdr->ether_type);
 
-        printf("Receive a packet from port %" PRIu16 ", type %04x\n", port_id, ether_type);
+        //printf("Receive a packet from port %" PRIu16 ", type %04x\n", port_id, ether_type);
 
         switch (ether_type) {
         case RTE_ETHER_TYPE_ARP:

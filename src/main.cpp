@@ -21,13 +21,13 @@
 void print_stats(NetStats &st)
 {
     printf(
-        "num_arp: %" PRIu32 "\num_ipv4: %" PRIu32 "\num_ipv6: %" PRIu32 "\num_multicast: %" PRIu32 "\n", st.num_arp,
+        "num_arp: %" PRIu32 "\nnum_ipv4: %" PRIu32 "\nnum_ipv6: %" PRIu32 "\nnum_multicast: %" PRIu32 "\n", st.num_arp,
         st.num_ipv4, st.num_ipv6, st.num_multicast
     );
     for (auto it = st.arp_stats.begin(); it != st.arp_stats.end(); ++it) {
         printf(IPV4_PRT_FMT "\t%" PRIu32 "\n", IPV4_BYTES(it->first), it->second);
     }
-    printf("------------------------");
+    printf("------------------------\n");
 }
 
 void main_loop()
