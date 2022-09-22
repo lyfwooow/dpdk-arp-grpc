@@ -11,6 +11,7 @@
 #include <rte_lcore.h>
 #include <rte_mbuf.h>
 #include <rte_mempool.h>
+#include <rte_rwlock.h>
 
 #include "common.h"
 #include "data.hpp"
@@ -24,7 +25,7 @@ void print_stats(NetStats &st)
         st.num_ipv4, st.num_ipv6, st.num_multicast
     );
     for (auto it = st.arp_stats.begin(); it != st.arp_stats.end(); ++it) {
-        printf(IPV4_PRT_FMT, "\t%" PRIu32 "\n", IPV4_BYTES(it->first), it->second);
+        printf(IPV4_PRT_FMT "\t%" PRIu32 "\n", IPV4_BYTES(it->first), it->second);
     }
     printf("------------------------");
 }
@@ -41,6 +42,8 @@ void main_loop()
         uint16_t port_id;
         RTE_ETH_FOREACH_DEV(port_id)
         {
+            WriteLockGuard guard(lock);
+
             auto &st = net_stats_list.front();
             collect_stats(port_id, st);
 
