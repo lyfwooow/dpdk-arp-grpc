@@ -4,4 +4,4 @@
 
 #include "data.hpp"
 
-void collect_stats(uint16_t port_id, NetStats& st);
+void collect_stats(uint16_t port_id, NetStats &st);

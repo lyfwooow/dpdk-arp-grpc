@@ -12,18 +12,49 @@
 #include <rte_mbuf.h>
 #include <rte_mempool.h>
 
+#include "common.h"
 #include "data.hpp"
 #include "port.h"
 #include "process.hpp"
 
+void print_stats(NetStats &st)
+{
+    printf(
+        "num_arp: %" PRIu32 "\num_ipv4: %" PRIu32 "\num_ipv6: %" PRIu32 "\num_multicast: %" PRIu32 "\n", st.num_arp,
+        st.num_ipv4, st.num_ipv6, st.num_multicast
+    );
+    for (auto it = st.arp_stats.begin(); it != st.arp_stats.end(); ++it) {
+        printf(IPV4_PRT_FMT, "\t%" PRIu32 "\n", IPV4_BYTES(it->first), it->second);
+    }
+    printf("------------------------");
+}
+
 void main_loop()
 {
-    NetStats st; // TODO
+    net_stats_list.clear();
+    net_stats_list.emplace_front();
+
+    const uint64_t period = rte_get_tsc_hz();
+    uint64_t cur_period = rte_get_tsc_cycles();
+
     for (;;) {
         uint16_t port_id;
         RTE_ETH_FOREACH_DEV(port_id)
         {
+            auto &st = net_stats_list.front();
             collect_stats(port_id, st);
+
+            uint64_t cur_tsc = rte_get_timer_cycles();
+            if (cur_tsc - cur_period >= period) {
+                print_stats(st);
+
+                cur_period = cur_tsc;
+
+                // 添加新节点，删除旧节点
+                net_stats_list.emplace_front();
+                if (net_stats_list.size() > 60)
+                    net_stats_list.pop_back();
+            }
         }
     }
 }
