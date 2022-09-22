@@ -1,21 +1,23 @@
-syntax="proto2";
+syntax="proto3";
 
-
-message arp_common_res {
-    required int32 ret_state = 1;
+service Greeter{
+    //单次请求单次回应
+    rpc GetMsg(ReqMsg) returns (grpc_dpdk_arp_res){}
 }
 
-message grpc_dpdk_arp_req{
-
+//request
+message ReqMsg{
+    string data = 1;
 }
 
+//response
+message table_pkts {
+    string scrip = 1;
+    uint32 request_pkts_amount = 2;
+    uint32 rate = 3;
+}
+    
 message grpc_dpdk_arp_res{
-    required arg_common_res res = 1;
-    message table_pkts {
-        required string scrip = 1;
-        required uint32 request_pkts_amount = 2;
-        required uint32 rate = 3;
-    }
-    repeated table_pkts arp_pkts = 2; 
-    repeated table_pkts multicast_pkts = 3;
+    repeated table_pkts arp_pkts = 1; 
+    repeated table_pkts multicast_pkts = 2;
 }
