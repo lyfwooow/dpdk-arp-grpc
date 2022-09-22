@@ -12,16 +12,18 @@
 #include <rte_mbuf.h>
 #include <rte_mempool.h>
 
+#include "data.hpp"
 #include "port.h"
-#include "process.h"
+#include "process.hpp"
 
 void main_loop()
 {
+    NetStats st; // TODO
     for (;;) {
         uint16_t port_id;
         RTE_ETH_FOREACH_DEV(port_id)
         {
-            collect_stats(port_id);
+            collect_stats(port_id, st);
         }
     }
 }

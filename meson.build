@@ -8,9 +8,10 @@ project(
 dpdk = dependency('libdpdk')
 
 sources = files(
+    'src/data.cpp',
     'src/main.cpp',
     'src/port.c',
-    'src/process.c',
+    'src/process.cpp',
 )
 
 executable('monitor', sources, dependencies: dpdk, install : true)
