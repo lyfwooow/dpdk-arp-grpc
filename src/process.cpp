@@ -7,17 +7,15 @@
 #include <rte_ether.h>
 #include <rte_mbuf.h>
 
+#include "common.h"
 #include "data.hpp"
 #include "process.hpp"
-
-#define IPV4_PRT_FMT "%d.%d.%d.%d"
-#define IPV4_BYTES(ip) (((ip) >> 24) & 0xff), (((ip) >> 16) & 0xff), (((ip) >> 8) & 0xff), ((ip)&0xff)
 
 #define NB_PKTS 4
 
 static inline void collect_stats_arp(struct rte_arp_hdr *arp_hdr, NetStats &st)
 {
-    /* 只考虑 ARP 请求 */
+    // 只考虑 ARP 请求
     if (rte_be_to_cpu_16(arp_hdr->arp_opcode) != RTE_ARP_OP_REQUEST)
         return;
 
@@ -31,7 +29,7 @@ void collect_stats(uint16_t port_id, NetStats &st)
     struct rte_mbuf *pkts[NB_PKTS];
     uint16_t nb_rx = rte_eth_rx_burst(port_id, 0, pkts, NB_PKTS);
 
-    for (size_t i = 0; i < nb_rx; i++) {
+    for (uint16_t i = 0; i < nb_rx; i++) {
         struct rte_ether_hdr *ether_hdr = rte_pktmbuf_mtod(pkts[i], struct rte_ether_hdr *);
         uint16_t ether_type = rte_be_to_cpu_16(ether_hdr->ether_type);
 
