@@ -1,0 +1,11 @@
+BasedOnStyle: LLVM
+AccessModifierOffset: -4
+AlignAfterOpenBracket: BlockIndent
+AllowShortFunctionsOnASingleLine: Inline
+BraceWrapping:
+    AfterFunction: true
+    AfterClass: true
+BreakBeforeBraces: Custom
+ColumnLimit: 120
+IndentPPDirectives: BeforeHash
+IndentWidth: 4
