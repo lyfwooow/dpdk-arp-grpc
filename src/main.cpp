@@ -38,7 +38,7 @@ static inline void init_list()
     net_stats_list.emplace_front();
 }
 
-void main_loop()
+__rte_noreturn int main_loop(__rte_unused void *arg)
 {
     const uint64_t period = rte_get_tsc_hz();
     uint64_t cur_period = rte_get_tsc_cycles();
@@ -96,7 +96,11 @@ int main(int argc, char *argv[])
     port_init_all(mbuf_pool);
 
     init_list();
-    main_loop();
+
+    unsigned int lcore_id = rte_get_next_lcore(-1, 1, 1);
+    rte_eal_remote_launch(main_loop, NULL, lcore_id);
+
+    rte_eal_mp_wait_lcore();
 
     port_finalize_all();
 

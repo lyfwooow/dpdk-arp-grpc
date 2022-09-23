@@ -7,7 +7,7 @@
 
 #include <rte_rwlock.h>
 
-std::string ipv4_to_string(uint32_t ip)
+static inline std::string ipv4_to_string(uint32_t ip)
 {
     return std::to_string((ip >> 24) & 0xff) + "." + std::to_string((ip >> 16) & 0xff) + "." +
            std::to_string((ip >> 8) & 0xff) + "." + std::to_string(ip & 0xff);
