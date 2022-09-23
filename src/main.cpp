@@ -17,6 +17,7 @@
 #include "data.hpp"
 #include "port.h"
 #include "process.hpp"
+#include "proto/server.hpp"
 
 static inline void print_stats(NetStats &st)
 {
@@ -96,9 +97,10 @@ int main(int argc, char *argv[])
     port_init_all(mbuf_pool);
 
     init_list();
-
     unsigned int lcore_id = rte_get_next_lcore(-1, 1, 1);
     rte_eal_remote_launch(main_loop, NULL, lcore_id);
+
+    run_server();
 
     rte_eal_mp_wait_lcore();
 

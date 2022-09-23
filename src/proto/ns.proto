@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package ns;
+
+service NetStats {
+    rpc GetNetStats(Request) returns (Response) {}
+}
+
+message Request {
+}
+
+message Response {
+    required uint32 num_arp = 1;
+    required uint32 num_ipv4 = 2;
+    required uint32 num_ipv6 = 3;
+    required uint32 num_multicast = 4;
+    map<string, ARPStats> arp_stats = 5;
+}
+
+message ARPStats {
+    required uint32 num_pkts = 1;
+    required uint32 rate = 2;
+}
