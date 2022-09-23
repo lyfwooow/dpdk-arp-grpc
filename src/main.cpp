@@ -18,7 +18,7 @@
 #include "port.h"
 #include "process.hpp"
 
-void print_stats(NetStats &st)
+static inline void print_stats(NetStats &st)
 {
     printf(
         "num_arp: %" PRIu32 "\nnum_ipv4: %" PRIu32 "\nnum_ipv6: %" PRIu32 "\nnum_multicast: %" PRIu32 "\n", st.num_arp,
@@ -30,11 +30,16 @@ void print_stats(NetStats &st)
     printf("------------------------\n");
 }
 
-void main_loop()
+static inline void init_list()
 {
+    WriteLockGuard guard(lock);
+
     net_stats_list.clear();
     net_stats_list.emplace_front();
+}
 
+void main_loop()
+{
     const uint64_t period = rte_get_tsc_hz();
     uint64_t cur_period = rte_get_tsc_cycles();
 
@@ -90,6 +95,7 @@ int main(int argc, char *argv[])
 
     port_init_all(mbuf_pool);
 
+    init_list();
     main_loop();
 
     port_finalize_all();
