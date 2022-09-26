@@ -14,44 +14,57 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ngrpc.proto\"\x16\n\x06ReqMsg\x12\x0c\n\x04\x64\x61ta\x18\x01 \x01(\t\"F\n\ntable_pkts\x12\r\n\x05scrip\x18\x01 \x01(\t\x12\x1b\n\x13request_pkts_amount\x18\x02 \x01(\r\x12\x0c\n\x04rate\x18\x03 \x01(\r\"W\n\x11grpc_dpdk_arp_res\x12\x1d\n\x08\x61rp_pkts\x18\x01 \x03(\x0b\x32\x0b.table_pkts\x12#\n\x0emulticast_pkts\x18\x02 \x03(\x0b\x32\x0b.table_pkts22\n\x07Greeter\x12\'\n\x06GetMsg\x12\x07.ReqMsg\x1a\x12.grpc_dpdk_arp_res\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\ngrpc.proto\"\t\n\x07Request\"\xbe\x01\n\x08Response\x12\x0f\n\x07num_arp\x18\x01 \x02(\r\x12\x10\n\x08num_ipv4\x18\x02 \x02(\r\x12\x10\n\x08num_ipv6\x18\x03 \x02(\r\x12\x15\n\rnum_multicast\x18\x04 \x02(\r\x12*\n\tarp_stats\x18\x05 \x03(\x0b\x32\x17.Response.ArpStatsEntry\x1a:\n\rArpStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x18\n\x05value\x18\x02 \x01(\x0b\x32\t.ARPStats:\x02\x38\x01\"*\n\x08\x41RPStats\x12\x10\n\x08num_pkts\x18\x01 \x02(\r\x12\x0c\n\x04rate\x18\x02 \x02(\r20\n\x08NetStats\x12$\n\x0bGetNetStats\x12\x08.Request\x1a\t.Response\"\x00')
 
 
 
-_REQMSG = DESCRIPTOR.message_types_by_name['ReqMsg']
-_TABLE_PKTS = DESCRIPTOR.message_types_by_name['table_pkts']
-_GRPC_DPDK_ARP_RES = DESCRIPTOR.message_types_by_name['grpc_dpdk_arp_res']
-ReqMsg = _reflection.GeneratedProtocolMessageType('ReqMsg', (_message.Message,), {
-  'DESCRIPTOR' : _REQMSG,
+_REQUEST = DESCRIPTOR.message_types_by_name['Request']
+_RESPONSE = DESCRIPTOR.message_types_by_name['Response']
+_RESPONSE_ARPSTATSENTRY = _RESPONSE.nested_types_by_name['ArpStatsEntry']
+_ARPSTATS = DESCRIPTOR.message_types_by_name['ARPStats']
+Request = _reflection.GeneratedProtocolMessageType('Request', (_message.Message,), {
+  'DESCRIPTOR' : _REQUEST,
   '__module__' : 'grpc_pb2'
-  # @@protoc_insertion_point(class_scope:ReqMsg)
+  # @@protoc_insertion_point(class_scope:Request)
   })
-_sym_db.RegisterMessage(ReqMsg)
+_sym_db.RegisterMessage(Request)
 
-table_pkts = _reflection.GeneratedProtocolMessageType('table_pkts', (_message.Message,), {
-  'DESCRIPTOR' : _TABLE_PKTS,
+Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), {
+
+  'ArpStatsEntry' : _reflection.GeneratedProtocolMessageType('ArpStatsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _RESPONSE_ARPSTATSENTRY,
+    '__module__' : 'grpc_pb2'
+    # @@protoc_insertion_point(class_scope:Response.ArpStatsEntry)
+    })
+  ,
+  'DESCRIPTOR' : _RESPONSE,
   '__module__' : 'grpc_pb2'
-  # @@protoc_insertion_point(class_scope:table_pkts)
+  # @@protoc_insertion_point(class_scope:Response)
   })
-_sym_db.RegisterMessage(table_pkts)
+_sym_db.RegisterMessage(Response)
+_sym_db.RegisterMessage(Response.ArpStatsEntry)
 
-grpc_dpdk_arp_res = _reflection.GeneratedProtocolMessageType('grpc_dpdk_arp_res', (_message.Message,), {
-  'DESCRIPTOR' : _GRPC_DPDK_ARP_RES,
+ARPStats = _reflection.GeneratedProtocolMessageType('ARPStats', (_message.Message,), {
+  'DESCRIPTOR' : _ARPSTATS,
   '__module__' : 'grpc_pb2'
-  # @@protoc_insertion_point(class_scope:grpc_dpdk_arp_res)
+  # @@protoc_insertion_point(class_scope:ARPStats)
   })
-_sym_db.RegisterMessage(grpc_dpdk_arp_res)
+_sym_db.RegisterMessage(ARPStats)
 
-_GREETER = DESCRIPTOR.services_by_name['Greeter']
+_NETSTATS = DESCRIPTOR.services_by_name['NetStats']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _REQMSG._serialized_start=14
-  _REQMSG._serialized_end=36
-  _TABLE_PKTS._serialized_start=38
-  _TABLE_PKTS._serialized_end=108
-  _GRPC_DPDK_ARP_RES._serialized_start=110
-  _GRPC_DPDK_ARP_RES._serialized_end=197
-  _GREETER._serialized_start=199
-  _GREETER._serialized_end=249
+  _RESPONSE_ARPSTATSENTRY._options = None
+  _RESPONSE_ARPSTATSENTRY._serialized_options = b'8\001'
+  _REQUEST._serialized_start=14
+  _REQUEST._serialized_end=23
+  _RESPONSE._serialized_start=26
+  _RESPONSE._serialized_end=216
+  _RESPONSE_ARPSTATSENTRY._serialized_start=158
+  _RESPONSE_ARPSTATSENTRY._serialized_end=216
+  _ARPSTATS._serialized_start=218
+  _ARPSTATS._serialized_end=260
+  _NETSTATS._serialized_start=262
+  _NETSTATS._serialized_end=310
 # @@protoc_insertion_point(module_scope)
