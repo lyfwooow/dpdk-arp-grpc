@@ -12,6 +12,7 @@ public:
     ::grpc::Status
     GetNetStats(::grpc::ServerContext *context, const ::ns::Request *request, ::ns::Response *response) override
     {
+        printf("receive####################################################################");
         WriteLockGuard guard(lock);
 
         NetStats st;
@@ -47,7 +48,7 @@ public:
 
 void run_server()
 {
-    std::string server_address("0.0.0.0:50051");
+    std::string server_address("localhost:50051");
     NetStatsImpl service;
 
     grpc::ServerBuilder builder;
