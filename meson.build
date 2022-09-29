@@ -3,12 +3,14 @@ project(
     'c',
     'cpp',
     version : '1.0',
+    default_options : [
+        'cpp_std=c++11',
+    ],
 )
 
 dpdk = dependency('libdpdk')
 protobuf = dependency('protobuf')
 grpc = dependency('grpc++')
-
 
 sources = files(
     'src/data.cpp',
