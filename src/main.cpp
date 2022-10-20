@@ -58,7 +58,7 @@ __rte_noreturn int main_loop(__rte_unused void *arg)
                 print_stats(st);
 
                 cur_period = cur_tsc;
-
+                 
                 // 添加新节点，删除旧节点
                 net_stats_list.emplace_front();
                 if (net_stats_list.size() > 60)

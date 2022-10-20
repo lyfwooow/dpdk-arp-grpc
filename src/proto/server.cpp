@@ -27,10 +27,10 @@ public:
         }
 
         uint32_t seconds = static_cast<uint32_t>(net_stats_list.size());
-        response->set_num_arp(st.num_arp / seconds);
-        response->set_num_ipv4(st.num_ipv4 / seconds);
-        response->set_num_ipv6(st.num_ipv6 / seconds);
-        response->set_num_multicast(st.num_multicast / seconds);
+        response->set_num_arp(st.num_arp);
+        response->set_num_ipv4(st.num_ipv4);
+        response->set_num_ipv6(st.num_ipv6);
+        response->set_num_multicast(st.num_multicast);
 
         auto &arp_stats = *response->mutable_arp_stats();
         for (auto it = st.arp_stats.begin(); it != st.arp_stats.end(); ++it) {
