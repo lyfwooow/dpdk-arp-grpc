@@ -14,7 +14,9 @@ void port_init(uint16_t port_id, struct rte_mempool *mbuf_pool)
 
     struct rte_eth_dev_info dev_info;
     ret = rte_eth_dev_info_get(port_id, &dev_info);
-    if (ret < 0) {
+    struct rte_device *device=dev_info.device;
+    printf("device info is %s \n",device->name);   
+ if (ret < 0) {
         rte_exit(1, "rte_eth_dev_info_get: err=%d, port=%" PRIu16 "\n", ret, port_id);
     }
 

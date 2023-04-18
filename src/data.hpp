@@ -7,6 +7,8 @@
 
 #include <rte_rwlock.h>
 
+#define PORT_PCI_DEV_ID_LENGTH 12
+
 static inline std::string ipv4_to_string(uint32_t ip)
 {
     return std::to_string((ip >> 24) & 0xff) + "." + std::to_string((ip >> 16) & 0xff) + "." +
@@ -16,9 +18,10 @@ static inline std::string ipv4_to_string(uint32_t ip)
 class NetStats
 {
 public:
-    NetStats() : num_arp(0), num_ipv4(0), num_ipv6(0), num_multicast(0) {}
-
+   // NetStats() : pci_id('0'), num_arp(0), num_ipv4(0), num_ipv6(0), num_multicast(0) {}
+    char pci_id[PORT_PCI_DEV_ID_LENGTH + 1];
     uint32_t num_arp;
+    uint32_t num_bcast_arp;
     uint32_t num_ipv4;
     uint32_t num_ipv6;
     uint32_t num_multicast;
@@ -66,4 +69,5 @@ private:
 };
 
 extern std::list<NetStats> net_stats_list;
+extern std::list<NetStats> net_stats_list_2;
 extern RWLock lock;

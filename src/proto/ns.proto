@@ -10,11 +10,21 @@ message Request {
 }
 
 message Response {
-    required uint32 num_arp = 1;
-    required uint32 num_ipv4 = 2;
-    required uint32 num_ipv6 = 3;
-    required uint32 num_multicast = 4;
-    map<string, ARPStats> arp_stats = 5;
+    required string pci_id = 1;
+    required uint32 num_arp = 2;
+    required uint32 num_bcast_arp = 3;
+    required uint32 num_ipv4 = 4;
+    required uint32 num_ipv6 = 5;
+    required uint32 num_multicast = 6;
+    map<string, ARPStats> arp_stats = 7;
+
+    required string pci_id_2 = 8;
+    required uint32 num_arp_2 = 9;
+    required uint32 num_bcast_arp_2 = 10;
+    required uint32 num_ipv4_2 = 11;
+    required uint32 num_ipv6_2 = 12;
+    required uint32 num_multicast_2 = 13;
+    map<string, ARPStats> arp_stats_2 = 14;
 }
 
 message ARPStats {
